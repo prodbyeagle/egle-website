@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
    }, []);
 
    return (
-      <div className={`${darkMode ? 'dark' : ''} p-3 min-h-screen transition-colors duration-500 ease-in-out bg-gray-900 text-gray-100`}>
+      <div className={`${darkMode ? 'dark' : ''} p-4 min-h-screen transition-colors duration-500 ease-in-out bg-gray-900 text-gray-100`}>
          <Navbar toggleSidebar={toggleSidebar} />
          <div className="flex relative">
             <div className={`fixed inset-0 z-40 md:static md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>

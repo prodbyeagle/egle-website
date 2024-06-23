@@ -4,7 +4,7 @@ function Modal({ isOpen, onClose, title, children }) {
    if (!isOpen) return null;
 
    return (
-      <div className="fixed inset-0 z-50 flex items-center p-6 justify-center rounded-lg bg-black bg-opacity-70 backdrop-blur-sm" onClick={onClose}>
+      <div className="fixed inset-0 z-50 flex items-center justify-center rounded-lg bg-black bg-opacity-70 backdrop-blur-md" onClick={onClose}>
          <div
             className="relative w-full max-w-lg p-6 bg-gray-800 rounded-lg"
             onClick={(e) => e.stopPropagation()}
