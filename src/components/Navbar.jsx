@@ -26,7 +26,6 @@ function Navbar({ toggleSidebar }) {
    return (
       <nav className="bg-gray-800 p-4 rounded-md">
          <div className="container mx-auto flex justify-between items-center">
-            {/* Logo or brand link */}
             <Link to="/" className="flex items-center text-white text-xl font-bold" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                <img src={isHovered ? eagleLogoGIF : eagleLogoPNG} alt="EGLE Logo" className="w-8 h-8 mr-2" />
                EGLE

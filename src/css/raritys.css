@@ -1,47 +1,37 @@
 @keyframes rainbow {
    0% {
-      color: #ff0000;
+      color: #ff6565;
    }
 
    20% {
-      color: #ffaa00;
+      color: #ffc34a;
    }
 
    40% {
-      color: #ffff00;
+      color: #ffff50;
    }
 
    60% {
-      color: #00ff00;
+      color: #4dff4d;
    }
 
    80% {
-      color: #0000ff;
+      color: #4545ff;
    }
 
    100% {
-      color: #aa00ff;
+      color: #ca61ff;
    }
 }
 
-.rainbow {
-   animation: rainbow 10s infinite alternate;
+.rainbow-text {
+   animation: rainbow 20s infinite alternate;
 }
 
-@keyframes golden {
-   0% {
-      text-shadow: 0 0 10px gold;
-   }
-
-   50% {
-      text-shadow: 0 0 30px gold;
-   }
-
-   100% {
-      text-shadow: 0 0 10px gold;
-   }
-}
-
-.golden {
-   animation: golden 1.5s infinite;
+.golden-text {
+   background-image: url('../assets/golden.gif');
+   background-size: cover;
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
 }

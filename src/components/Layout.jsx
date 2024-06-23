@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import { fetchClanBattle } from '../api/fetchClanBattle';
-import '../color.css'; // Import the color.css for any color variables if needed
+import '../color.css';
 
 const Layout = ({ children }) => {
    const [darkMode, setDarkMode] = useState(false);
