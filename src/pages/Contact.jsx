@@ -5,12 +5,12 @@ import { faTwitter, faInstagram, faYoutube, faDiscord } from '@fortawesome/free-
 const Contact = () => {
    return (
       <div className="bg-gray-800 rounded-md p-5 m-4 shadow-lg">
-         <h1 className="text-4xl font-bold mb-4 text-white">Kontakt</h1>
+         <h1 className="text-4xl font-bold mb-4 text-white">Contact</h1>
          <p className="text-lg text-gray-300 mb-4">
-            Kontaktiere uns über diese Seite!
+            Contact us here!
          </p>
          <div className="flex flex-col space-y-4 mb-6">
-            <a href="https://discord.com/invite/your-discord-link" className="text-blue-400 hover:underline flex items-center">
+            <a href="https://discord.com/2XdVJa9gV8" className="text-blue-400 hover:underline flex items-center">
                <FontAwesomeIcon icon={faDiscord} className="mr-2" />
                Join the EGLE Discord Server!
             </a>
