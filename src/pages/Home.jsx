@@ -13,7 +13,7 @@ function Home() {
    };
 
    return (
-      <div className="p-4 m-3 bg-gray-800 rounded-md">
+      <div className="p-4 m-4 bg-gray-800 rounded-md">
          <h2 className="mb-4 text-2xl font-bold text-gray-200">Home</h2>
 
          <section className="p-8 mb-6 text-gray-100 bg-gray-700 rounded-md">
@@ -24,15 +24,15 @@ function Home() {
 
          <section className="grid grid-cols-1 gap-4 mb-8 sm:grid-cols-2 md:grid-cols-3">
 
-            <div className="p-4 transition duration-200 ease-in-out transform bg-gray-800 border-2 border-gray-700 rounded-md hover:scale-95 hover:shadow-lg">
+            <div className="p-4 transition duration-100 ease-in-out transform bg-gray-800 border-2 border-gray-700 rounded-md hover:scale-105 hover:shadow-lg">
                <h3 className="text-lg font-semibold text-gray-100">Team Play</h3>
             </div>
 
-            <div className="p-4 transition duration-200 ease-in-out transform bg-gray-800 border-2 border-gray-700 rounded-md hover:scale-95 hover:shadow-lg">
+            <div className="p-4 transition duration-100 ease-in-out transform bg-gray-800 border-2 border-gray-700 rounded-md hover:scale-105 hover:shadow-lg">
                <h3 className="text-lg font-semibold text-gray-100">Knowledge Sharing</h3>
             </div>
 
-            <div className="p-4 transition duration-200 ease-in-out transform bg-gray-800 border-2 border-gray-700 rounded-md hover:scale-95 hover:shadow-lg">
+            <div className="p-4 transition duration-100 ease-in-out transform bg-gray-800 border-2 border-gray-700 rounded-md hover:scale-105 hover:shadow-lg">
                <h3 className="text-lg font-semibold text-gray-100">Competitions</h3>
             </div>
          </section>
@@ -41,22 +41,22 @@ function Home() {
             <h3 className="mb-4 text-2xl font-bold text-gray-100">Rules</h3>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-               <div className="p-4 transition duration-200 ease-in-out transform bg-gray-700 border-2 border-gray-600 rounded-md hover:scale-95 hover:shadow-lg">
+               <div className="p-4 transition duration-100 ease-in-out transform bg-gray-700 border-2 border-gray-600 hover:border-gray-300 rounded-md hover:shadow-2xl">
                   <h4 className="mb-2 text-lg font-semibold text-gray-100">Respect</h4>
                   <p className="text-gray-300">Treat all members with respect and courtesy.</p>
                </div>
 
-               <div className="p-4 transition duration-200 ease-in-out transform bg-gray-700 border-2 border-gray-600 rounded-md hover:scale-95 hover:shadow-lg">
+               <div className="p-4 transition duration-100 ease-in-out transform bg-gray-700 border-2 border-gray-600 hover:border-gray-300 rounded-md hover:shadow-2xl">
                   <h4 className="mb-2 text-lg font-semibold text-gray-100">No Spam</h4>
                   <p className="text-gray-300">Avoid spamming and keep chat clean and relevant.</p>
                </div>
 
-               <div className="p-4 transition duration-200 ease-in-out transform bg-gray-700 border-2 border-gray-600 rounded-md hover:scale-95 hover:shadow-lg">
+               <div className="p-4 transition duration-100 ease-in-out transform bg-gray-700 border-2 border-gray-600 rounded-md hover:border-gray-300 hover:shadow-2xl">
                   <h4 className="mb-2 text-lg font-semibold text-gray-100">Fair Play</h4>
                   <p className="text-gray-300">Cheating and the use of unauthorized software are strictly prohibited..</p>
                </div>
 
-               <div className="p-4 transition duration-200 ease-in-out transform bg-gray-700 border-2 border-gray-600 rounded-md hover:scale-95 hover:shadow-lg">
+               <div className="p-4 transition duration-100 ease-in-out transform bg-gray-700 border-2 border-gray-600 hover:border-gray-300 rounded-md hover:shadow-2xl">
                   <h4 className="mb-2 text-lg font-semibold text-gray-100">Conflict Resolution</h4>
                   <p className="text-gray-300">Resolve conflicts through calm and reasonable discussions. Contact a moderator if necessary.</p>
                </div>
@@ -68,7 +68,7 @@ function Home() {
             <p className="text-lg text-gray-300">To join our vibrant Pet Sim 99 Clan, members must meet the following criteria.</p>
             <button
                onClick={openModal}
-               className="px-4 py-2 mt-4 text-gray-100 transition duration-200 ease-in-out transform bg-gray-600 rounded-md hover:bg-gray-500 hover:scale-105"
+               className="px-4 py-2 mt-4 text-gray-100 transition duration-100 ease-in-out transform bg-gray-600 rounded-md hover:bg-gray-500 hover:scale-105"
             >
                View Requirements
             </button>
