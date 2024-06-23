@@ -5,10 +5,14 @@ import Home from './pages/Home';
 import Application from './pages/Application';
 import Contact from './pages/Contact';
 import './color.css';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const App = () => {
   return (
     <Router>
+      <Analytics mode="auto" debug={true} />
+      <SpeedInsights />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
