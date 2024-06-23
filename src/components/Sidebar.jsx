@@ -59,15 +59,18 @@ function Sidebar({ battle, onClose }) {
             </button>
          </div>
          {battle && (
-            <div className="mb-4">
-               <p className="mb-4">
-                  <span className="font-semibold"></span>{formatTime(battle.configData.FinishTime)}
+            <div className="mb-4 text-center">
+               <p
+                  title={`${new Date(battle.configData.FinishTime * 1000).toLocaleString()}`}
+                  className="mb-4 bg-gray-700 rounded-md text-center cursor-help"
+               >
+                  {formatTime(battle.configData.FinishTime)}
                </p>
                <div>
                   <h4 className="text-lg font-bold mb-2">Placement Rewards</h4>
                   <ul>
                      {battle.configData.PlacementRewards.map((reward, index) => (
-                        <li key={index} className="mb-2 font-semibold">
+                        <li key={index} className="mb-2 font-medium">
                            <span className={getRarityClassName(reward)}>{reward.Item._data.id}:</span> #{reward.Best} - #{reward.Worst}
                         </li>
                      ))}
