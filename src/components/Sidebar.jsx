@@ -51,7 +51,7 @@ function Sidebar({ battle, onClose }) {
    };
 
    return (
-      <aside className="bg-gray-800 text-gray-200 mt-3 max-h-96 p-4 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0">
+      <aside className="bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0">
          <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold">{battle && battle.configData.Title}</h3>
             <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
@@ -59,15 +59,18 @@ function Sidebar({ battle, onClose }) {
             </button>
          </div>
          {battle && (
-            <div className="mb-4">
-               <p className="mb-4">
-                  <span className="font-semibold"></span>{formatTime(battle.configData.FinishTime)}
+            <div className="mb-4 text-center">
+               <p
+                  title={`${new Date(battle.configData.FinishTime * 1000).toLocaleString()}`}
+                  className="mb-4 bg-gray-700 rounded-md text-center cursor-help"
+               >
+                  {formatTime(battle.configData.FinishTime)}
                </p>
                <div>
                   <h4 className="text-lg font-bold mb-2">Placement Rewards</h4>
                   <ul>
                      {battle.configData.PlacementRewards.map((reward, index) => (
-                        <li key={index} className="mb-2 font-semibold">
+                        <li key={index} className="mb-2 font-medium">
                            <span className={getRarityClassName(reward)}>{reward.Item._data.id}:</span> #{reward.Best} - #{reward.Worst}
                         </li>
                      ))}

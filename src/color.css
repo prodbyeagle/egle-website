@@ -49,6 +49,11 @@ body.dark {
    color: var(--color-text-light);
 }
 
+.h-112 {
+   height: 36rem
+   ;
+}
+
 /* Custom media queries for responsive design */
 @media (min-width: 768px) {
    .sidebar-open {
