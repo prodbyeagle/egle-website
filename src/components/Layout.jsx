@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import Sidebar from './Sidebar';
+import { BattleSidebarContent, LeaderboardSidebarContent } from './Sidebar';
 import Modal from './Modal';
 import { fetchClanBattle } from '../api/fetchClanBattle';
+import { fetchLeaderboard } from '../api/fetchLeaderboard';
 import '../color.css';
 
 const Layout = ({ children }) => {
    const [darkMode, setDarkMode] = useState(false);
    const [battle, setBattle] = useState(null);
+   const [leaderboardData, setLeaderboardData] = useState([]);
    const [sidebarOpen, setSidebarOpen] = useState(false);
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [modalContent, setModalContent] = useState(null);
@@ -18,7 +20,18 @@ const Layout = ({ children }) => {
          setBattle(data.data);
       };
 
+      const getLeaderboard = async () => {
+         try {
+            const data = await fetchLeaderboard();
+            console.log('Leaderboard data received in frontend:', data);
+            setLeaderboardData(data);
+         } catch (error) {
+            console.error('Error fetching leaderboard data:', error);
+         }
+      };
+
       getBattle();
+      getLeaderboard();
    }, []);
 
    useEffect(() => {
@@ -34,25 +47,28 @@ const Layout = ({ children }) => {
    };
 
    const openModal = (content) => {
-      console.log('Opening modal with content:', content);
       setModalContent(content);
       setIsModalOpen(true);
    };
 
    const closeModal = () => {
-      console.log('Closing modal');
       setIsModalOpen(false);
       setModalContent(null);
    };
 
-   console.log('Layout render - isModalOpen:', isModalOpen);
-
    return (
       <div className={`${darkMode ? 'dark' : ''} p-4 min-h-screen transition-colors duration-500 ease-in-out bg-gray-900 text-gray-100`}>
          <Navbar toggleSidebar={toggleSidebar} />
-         <div className="flex relative">
-            <div className={`fixed inset-0 z-40 md:static md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
-               <Sidebar battle={battle} onClose={toggleSidebar} />
+         <div className="relative flex">
+            <div className={`fixed inset-0 z-40 md:static md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:w-64`}>
+               <div className="h-full flex flex-col">
+                  <div>
+                     <BattleSidebarContent battle={battle} onClose={toggleSidebar} />
+                  </div>
+                  <div>
+                     <LeaderboardSidebarContent leaderboardData={leaderboardData} onClose={toggleSidebar} />
+                  </div>
+               </div>
             </div>
             {sidebarOpen && (
                <div
