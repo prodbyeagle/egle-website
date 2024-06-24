@@ -42,7 +42,7 @@ function Sidebar({ battle, onClose }) {
       if (daysDifference >= 7) {
          return `${Math.ceil(daysDifference / 7)} Weeks left`;
       } else if (daysDifference === 1) {
-         return '1 Days left';
+         return '1 Day left';
       } else if (daysDifference > 0) {
          return `${daysDifference} Days left`;
       } else {
@@ -53,12 +53,12 @@ function Sidebar({ battle, onClose }) {
    return (
       <aside className="bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0">
          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold">{battle && battle.configData.Title}</h3>
+            <h3 className="text-xl font-bold">{battle && battle.configData?.Title}</h3>
             <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
                <RoundedXIcon />
             </button>
          </div>
-         {battle && (
+         {battle && battle.configData && (
             <div className="mb-4 text-center">
                <p
                   title={`${new Date(battle.configData.FinishTime * 1000).toLocaleString()}`}
@@ -78,6 +78,39 @@ function Sidebar({ battle, onClose }) {
                </div>
             </div>
          )}
+      </aside>
+   );
+}
+
+export function BattleSidebarContent({ battle, onClose }) {
+   return (
+      <Sidebar battle={battle} onClose={onClose} />
+   );
+}
+
+export function LeaderboardSidebarContent({ leaderboardData, onClose }) {
+   return (
+      <aside className="bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0">
+         <div className="flex justify-between items-center mb-4">
+            {/* <h3 className="text-xl font-bold">Leaderboard</h3> */}
+            <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
+               <RoundedXIcon />
+            </button>
+         </div>
+         <div className="mb-4 text-center">
+            {/* <h4 className="text-lg font-bold mb-2">Top #10 Players</h4> */}
+            {leaderboardData && leaderboardData.length > 0 ? (
+               <ul>
+                  {leaderboardData.map((user, index) => (
+                     <li key={index} className="mb-2 font-medium">
+                        {user.username}: {user.xp} XP
+                     </li>
+                  ))}
+               </ul>
+            ) : (
+               <p className="text-gray-400 italic">Coming soon...</p>
+            )}
+         </div>
       </aside>
    );
 }
