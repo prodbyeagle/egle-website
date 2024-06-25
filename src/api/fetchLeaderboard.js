@@ -12,5 +12,3 @@ export const fetchLeaderboard = async () => {
       throw error;
    }
 };
-
-// \"npm run server\"

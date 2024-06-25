@@ -51,7 +51,7 @@ function Sidebar({ battle, onClose }) {
    };
 
    return (
-      <aside className="bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0">
+      <aside className="bg-gray-800 text-center text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0 hidden md:block">
          <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold">{battle && battle.configData?.Title}</h3>
             <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
@@ -59,15 +59,15 @@ function Sidebar({ battle, onClose }) {
             </button>
          </div>
          {battle && battle.configData && (
-            <div className="mb-4 text-center">
+            <div className="mb-4">
                <p
                   title={`${new Date(battle.configData.FinishTime * 1000).toLocaleString()}`}
-                  className="mb-4 bg-gray-700 rounded-md text-center cursor-help"
+                  className="mb-4 bg-gray-700 rounded-md cursor-help"
                >
                   {formatTime(battle.configData.FinishTime)}
                </p>
                <div>
-                  <h4 className="text-lg font-bold mb-2">Placement Rewards</h4>
+                  <h4 className="text-lg font-bold mb-2">Rewards</h4>
                   <ul>
                      {battle.configData.PlacementRewards.map((reward, index) => (
                         <li key={index} className="mb-2 font-medium">
@@ -90,7 +90,7 @@ export function BattleSidebarContent({ battle, onClose }) {
 
 export function LeaderboardSidebarContent({ leaderboardData, onClose }) {
    return (
-      <aside className="bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0">
+      <aside className="bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0 hidden md:block">
          <div className="flex justify-between items-center mb-4">
             {/* <h3 className="text-xl font-bold">Leaderboard</h3> */}
             <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
@@ -98,7 +98,7 @@ export function LeaderboardSidebarContent({ leaderboardData, onClose }) {
             </button>
          </div>
          <div className="mb-4 text-center">
-            {/* <h4 className="text-lg font-bold mb-2">Top #10 Players</h4> */}
+            <h4 className="text-xl font-bold mb-2">Top #10 Players</h4>
             {leaderboardData && leaderboardData.length > 0 ? (
                <ul>
                   {leaderboardData.map((user, index) => (
