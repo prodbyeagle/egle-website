@@ -1,31 +1,31 @@
 @keyframes rainbow {
    0% {
-      color: #ff6565;
+      color: #ff8484;
    }
 
    20% {
-      color: #ffc34a;
+      color: #ffcd69;
    }
 
    40% {
-      color: #ffff50;
+      color: #f8f86f;
    }
 
    60% {
-      color: #4dff4d;
+      color: #76ff76;
    }
 
    80% {
-      color: #4545ff;
+      color: #7373ff;
    }
 
    100% {
-      color: #ca61ff;
+      color: #d683ff;
    }
 }
 
 .rainbow-text {
-   animation: rainbow 20s infinite alternate;
+   animation: rainbow 2s infinite alternate;
 }
 
 .golden-text {
