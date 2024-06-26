@@ -6,7 +6,7 @@ function Modal({ isOpen, onClose, title, children }) {
    return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-md" onClick={onClose}>
          <div
-            className="relative w-full max-w-lg p-6 bg-gray-800 rounded-lg"
+            className="relative w-full max-w-lg p-6 bg-gray-800 rounded-lg mr-4 ml-4"
             onClick={(e) => e.stopPropagation()}
          >
             <div className="flex items-center justify-between mb-4">

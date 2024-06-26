@@ -3,13 +3,12 @@ import Navbar from './Navbar';
 import { BattleSidebarContent, LeaderboardSidebarContent } from './Sidebar';
 import Modal from './Modal';
 import { fetchClanBattle } from '../api/fetchClanBattle';
-// import { fetchLeaderboard } from '../api/fetchLeaderboard';
+import { updates } from '../updates';
 import '../color.css';
 
 const Layout = ({ children }) => {
    const [darkMode, setDarkMode] = useState(false);
    const [battle, setBattle] = useState(null);
-   // const [leaderboardData, setLeaderboardData] = useState([]);
    const [sidebarOpen, setSidebarOpen] = useState(false);
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [modalContent, setModalContent] = useState(null);
@@ -20,18 +19,7 @@ const Layout = ({ children }) => {
          setBattle(data.data);
       };
 
-      // const getLeaderboard = async () => {
-      //    try {
-      //       const data = await fetchLeaderboard();
-      //       console.log('Leaderboard data received in frontend:', data);
-      //       setLeaderboardData(data);
-      //    } catch (error) {
-      //       console.error('Error fetching leaderboard data:', error);
-      //    }
-      // };
-
       getBattle();
-      // getLeaderboard();
    }, []);
 
    useEffect(() => {
@@ -39,6 +27,27 @@ const Layout = ({ children }) => {
       if (storedDarkMode !== null) {
          setDarkMode(storedDarkMode);
          document.body.classList.toggle('dark', storedDarkMode);
+      }
+
+      const latestUpdate = updates[0];
+      const storedVersion = localStorage.getItem('latestUpdateVersion');
+
+      if (storedVersion !== latestUpdate.version) {
+         openModal(
+            <div>
+               {updates.map((update, index) => (
+                  <div key={index} className="mb-4">
+                     <h4 className="text-xl font-bold">{update.version} - {update.date}</h4>
+                     <ul className="list-disc list-inside">
+                        {update.changes.map((change, idx) => (
+                           <li key={idx}>{change}</li>
+                        ))}
+                     </ul>
+                  </div>
+               ))}
+            </div>
+         );
+         localStorage.setItem('latestUpdateVersion', latestUpdate.version);
       }
    }, []);
 
@@ -67,7 +76,6 @@ const Layout = ({ children }) => {
                   </div>
                   <div>
                      <LeaderboardSidebarContent onClose={toggleSidebar} />
-                     {/* leaderboardData={leaderboardData} */}
                   </div>
                </div>
             </div>
@@ -83,7 +91,7 @@ const Layout = ({ children }) => {
                )}
             </main>
          </div>
-         <Modal isOpen={isModalOpen} onClose={closeModal} title="Modal Title">
+         <Modal isOpen={isModalOpen} onClose={closeModal} title="What's New!">
             {modalContent}
          </Modal>
       </div>
