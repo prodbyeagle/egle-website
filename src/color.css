@@ -22,11 +22,6 @@ body {
    font-family: 'Poppins', sans-serif;
 }
 
-body.dark {
-   background-color: var(--color-bg-dark);
-   color: var(--color-text-dark);
-}
-
 .p-4 {
    padding: 1rem;
 }
@@ -44,14 +39,7 @@ body.dark {
    color: var(--color-text-dark);
 }
 
-.sidebar.dark {
-   background-color: var(--color-bg-light);
-   color: var(--color-text-light);
-}
-
-/* Custom media queries for responsive design */
-@media (min-width: 768px) {
-   .sidebar-open {
-      display: block;
-   }
+.h-112 {
+   height: 36rem
+   ;
 }

@@ -1,37 +1,87 @@
 @keyframes rainbow {
    0% {
-      color: #ff6565;
+         color: #ff8484;
+         -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+      }
+   
+      20% {
+         color: #ffcd69;
+         -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+      }
+   
+      40% {
+         color: #f8f86f;
+         -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+      }
+   
+      60% {
+         color: #76ff76;
+         -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+      }
+   
+      80% {
+         color: #7373ff;
+         -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+      }
+   
+      100% {
+         color: #d683ff;
+         -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+      }
    }
-
-   20% {
-      color: #ffc34a;
-   }
-
-   40% {
-      color: #ffff50;
-   }
-
-   60% {
-      color: #4dff4d;
-   }
-
-   80% {
-      color: #4545ff;
-   }
-
-   100% {
-      color: #ca61ff;
-   }
-}
 
 .rainbow-text {
-   animation: rainbow 20s infinite alternate;
+   animation: rainbow 20s infinite alternate, shine 2s linear infinite;
 }
 
-.golden-text {
-   background-image: url('../assets/golden.gif');
-   background-size: cover;
-   color: transparent;
-   -webkit-background-clip: text;
+.eagle-text {
    background-clip: text;
+   -webkit-background-clip: text;
+   animation: shine 2s linear infinite;
+   color: #d683ff;
+   -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+   -webkit-mask-size: 200%;
+}
+
+.bronze-text {
+   position: relative;
+   display: inline-block;
+   animation: shine 2s linear infinite;
+   color: rgb(184, 117, 31);
+   -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+   -webkit-mask-size: 200%;
+}
+
+.silver-text {
+   position: relative;
+   display: inline-block;
+   animation: shine 2s linear infinite;
+   color: silver;
+   -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+   -webkit-mask-size: 200%;
+}
+
+.gold-text {
+   position: relative;
+   display: inline-block;
+   animation: shine 2s linear infinite;
+   color: gold;
+   -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+   -webkit-mask-size: 200%;
+}
+
+@keyframes shine {
+   from {
+      -webkit-mask-position: 150%;
+   }
+
+   to {
+      -webkit-mask-position: -50%;
+   }
 }

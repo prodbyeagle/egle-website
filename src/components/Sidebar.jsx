@@ -1,5 +1,5 @@
-import React from 'react';
-import { differenceInDays } from 'date-fns';
+import React, { useState, useEffect } from 'react';
+import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import '../css/raritys.css';
 
 const RoundedXIcon = () => (
@@ -20,6 +20,17 @@ const RoundedXIcon = () => (
 );
 
 function Sidebar({ battle, onClose }) {
+   const [showDetailedTime, setShowDetailedTime] = useState(true);
+   const [currentTime, setCurrentTime] = useState(new Date());
+
+   useEffect(() => {
+      const interval = setInterval(() => {
+         setCurrentTime(new Date());
+      }, 1);
+
+      return () => clearInterval(interval);
+   }, []);
+
    const getRarityClassName = (item) => {
       if (item && item.Item && item.Item._data) {
          const { id } = item.Item._data;
@@ -28,7 +39,7 @@ function Sidebar({ battle, onClose }) {
             if (item.Best === 1) {
                return 'rainbow-text';
             } else if (item.Best === 2) {
-               return 'golden-text';
+               return 'gold-text';
             }
          }
       }
@@ -37,37 +48,57 @@ function Sidebar({ battle, onClose }) {
 
    const formatTime = (timestamp) => {
       const finishTime = new Date(timestamp * 1000);
-      const daysDifference = differenceInDays(finishTime, new Date());
+      const now = currentTime;
 
-      if (daysDifference >= 7) {
-         return `${Math.ceil(daysDifference / 7)} Weeks left`;
-      } else if (daysDifference === 1) {
-         return '1 Days left';
-      } else if (daysDifference > 0) {
-         return `${daysDifference} Days left`;
+      if (showDetailedTime) {
+         const days = differenceInDays(finishTime, now);
+         const hours = differenceInHours(finishTime, now) % 24;
+         const minutes = differenceInMinutes(finishTime, now) % 60;
+         const seconds = differenceInSeconds(finishTime, now) % 60;
+
+         return `${days}d ${hours}h ${minutes}m ${seconds}s`;
       } else {
-         return 'Expired';
+         const daysDifference = differenceInDays(finishTime, now);
+
+         if (daysDifference >= 7) {
+            const weeks = Math.floor(daysDifference / 7);
+            const days = daysDifference % 7;
+            return `${weeks} Week and ${days} Day left`;
+         } else if (daysDifference === 1) {
+            return '1 Day left';
+         } else if (daysDifference > 0) {
+            return `${daysDifference} Days left`;
+         } else {
+            return 'Clan Battle Ended!';
+         }
       }
    };
 
+   const handleTimeClick = () => {
+      setShowDetailedTime(!showDetailedTime);
+   };
+
    return (
-      <aside className="bg-gray-800 text-gray-200 mt-3 max-h-96 p-4 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0">
+      <aside className="bg-gray-800 text-center text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0 hidden md:block">
          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold">{battle && battle.configData.Title}</h3>
+            <h3 className="text-xl font-bold">{battle && battle.configData?.Title}</h3>
             <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
                <RoundedXIcon />
             </button>
          </div>
-         {battle && (
+         {battle && battle.configData && (
             <div className="mb-4">
-               <p className="mb-4">
-                  <span className="font-semibold"></span>{formatTime(battle.configData.FinishTime)}
+               <p
+                  title={`Ends on ${new Date(battle.configData.FinishTime * 1000).toLocaleString()}`}
+                  className="mb-4 bg-gray-700 rounded-xl cursor-pointer"
+                  onClick={handleTimeClick}
+               >
+                  {formatTime(battle.configData.FinishTime)}
                </p>
                <div>
-                  <h4 className="text-lg font-bold mb-2">Placement Rewards</h4>
                   <ul>
                      {battle.configData.PlacementRewards.map((reward, index) => (
-                        <li key={index} className="mb-2 font-semibold">
+                        <li key={index} className="mb-2 font-medium">
                            <span className={getRarityClassName(reward)}>{reward.Item._data.id}:</span> #{reward.Best} - #{reward.Worst}
                         </li>
                      ))}
@@ -76,6 +107,12 @@ function Sidebar({ battle, onClose }) {
             </div>
          )}
       </aside>
+   );
+}
+
+export function BattleSidebarContent({ battle, onClose }) {
+   return (
+      <Sidebar battle={battle} onClose={onClose} />
    );
 }
 
