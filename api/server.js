@@ -16,26 +16,36 @@ async function connectToDatabase() {
       }
    });
 
-   await client.connect();
-   console.log('Connected to MongoDB');
+   try {
+      await client.connect();
+      console.log('Connected to MongoDB');
 
-   cachedDb = client.db('EGLEDB');
-   return cachedDb;
+      cachedDb = client.db('EGLEDB');
+      return cachedDb;
+   } catch (error) {
+      console.error('Failed to connect to MongoDB:', error);
+      throw error;
+   }
 }
 
 module.exports = async (req, res) => {
-   const db = await connectToDatabase();
-   const usersCollection = db.collection('users');
+   try {
+      const db = await connectToDatabase();
+      console.log('Database connection established');
 
-   if (req.method === 'GET' && req.url === '/api/leaderboard') {
-      try {
+      const usersCollection = db.collection('users');
+
+      if (req.method === 'GET' && req.url === '/api/server') {
+         console.log('Fetching leaderboard data...');
          const leaderboard = await usersCollection.find({ banned: false }).toArray();
+         console.log('Leaderboard data retrieved:', leaderboard);
          res.status(200).json(leaderboard);
-      } catch (error) {
-         console.error('Failed to fetch leaderboard:', error);
-         res.status(500).json({ error: 'Failed to fetch leaderboard' });
+      } else {
+         console.log('Endpoint not found:', req.method, req.url);
+         res.status(404).json({ error: 'Not found' });
       }
-   } else {
-      res.status(404).json({ error: 'Not found' });
+   } catch (error) {
+      console.error('Internal server error:', error);
+      res.status(500).json({ error: 'Internal server error' });
    }
 };

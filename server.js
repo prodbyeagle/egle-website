@@ -31,13 +31,22 @@ async function startServer() {
 
       app.get('/api/leaderboard', async (req, res) => {
          try {
-            const leaderboard = await usersCollection.find({ banned: false }).toArray();
+            const leaderboard = await usersCollection
+               .find({
+                  banned: { $ne: true },
+                  $and: [{ level: { $ne: 0 } }, { xp: { $ne: 0 } }]
+               })
+               .sort({ level: -1, xp: -1 })
+               .limit(10)
+               .toArray();
+
             res.json(leaderboard);
          } catch (error) {
             console.error('Failed to fetch leaderboard:', error);
             res.status(500).json({ error: 'Failed to fetch leaderboard' });
          }
       });
+
 
       app.listen(PORT, () => {
          console.log(`Server is running on port ${PORT}`);
