@@ -26,6 +26,8 @@ const Layout = ({ children }) => {
          }
       };
 
+      setInterval(getLeaderboard, 5000);
+
       const getBattle = async () => {
          try {
             const data = await fetchClanBattle();
@@ -41,14 +43,14 @@ const Layout = ({ children }) => {
             openModal(
                <div>
                   {updates.map((update, index) => (
-                     <div key={index} className="mb-4">
+                     <div key={index}>
                         <h4 className="text-xl font-bold">{update.version} - {update.date}</h4>
                         <ul className="list-disc list-inside">
                            {update.changes.map((change, idx) => (
                               <li key={idx}>{change}</li>
                            ))}
                         </ul>
-                        <h4 className={`text-sm italic ${update.from === "prodbyeagle" ? "eagle-text" : update.from === "dwhincandi" ? "andi-text" : ""}`}>From: {update.from}</h4>
+                        <h4 className={`mt-4 text-sm italic ${update.from === "prodbyeagle" ? "eagle-text" : ""}`}>From: {update.from}</h4>
                      </div>
                   ))}
                </div>

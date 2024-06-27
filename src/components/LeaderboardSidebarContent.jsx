@@ -1,5 +1,6 @@
 import React from 'react';
 import RoundedXIcon from './RoundedXIcon.jsx';
+import '../css/raritys.css';
 
 function LeaderboardSidebarContent({ leaderboardData, onClose }) {
    return (
@@ -9,18 +10,20 @@ function LeaderboardSidebarContent({ leaderboardData, onClose }) {
                <RoundedXIcon />
             </button>
          </div>
-         <div className="mb-4 text-center">
-            <h4 className="text-xl font-bold mb-2">Top #10 Players</h4>
+         <div className="text-center">
+            <h4 className="text-xl font-bold mb-2">Top #10 Chatters</h4>
             {leaderboardData && leaderboardData.length > 0 ? (
                <ul>
                   {leaderboardData.slice(0, 10).map((player, index) => (
-                     <li key={index} className="mb-2 font-medium">
-                        {player.username}: {player.xp} XP
+                     <li key={index} className={`mb-2 text-sm ${index === 0 ? 'gold-text' : index === 1 ? 'silver-text' : index === 2 ? 'bronze-text' : ''}`}>
+                        <span>
+                           {player.username}
+                        </span>: {player.level} Level & {player.xp} XP
                      </li>
                   ))}
                </ul>
             ) : (
-               <p className="text-gray-400 italic">No data available.</p>
+               <p className="text-gray-400 italic">No Users Found!</p>
             )}
          </div>
       </aside>

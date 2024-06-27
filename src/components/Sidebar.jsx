@@ -39,7 +39,7 @@ function Sidebar({ battle, onClose }) {
             if (item.Best === 1) {
                return 'rainbow-text';
             } else if (item.Best === 2) {
-               return 'golden-text';
+               return 'gold-text';
             }
          }
       }
@@ -89,14 +89,13 @@ function Sidebar({ battle, onClose }) {
          {battle && battle.configData && (
             <div className="mb-4">
                <p
-                  title={`${new Date(battle.configData.FinishTime * 1000).toLocaleString()}`}
-                  className="mb-4 bg-gray-700 rounded-md cursor-pointer"
+                  title={`Ends on ${new Date(battle.configData.FinishTime * 1000).toLocaleString()}`}
+                  className="mb-4 bg-gray-700 rounded-xl cursor-pointer"
                   onClick={handleTimeClick}
                >
                   {formatTime(battle.configData.FinishTime)}
                </p>
                <div>
-                  <h4 className="text-lg font-bold mb-2">Rewards</h4>
                   <ul>
                      {battle.configData.PlacementRewards.map((reward, index) => (
                         <li key={index} className="mb-2 font-medium">
