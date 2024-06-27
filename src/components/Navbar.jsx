@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import eagleLogoPNG from '../assets/eagle.png';
 import eagleLogoGIF from '../assets/eagle.gif';
-// import { fetchClanBattle } from '../api/fetchClanBattle';
 
 function Navbar() {
    const [isOpen, setIsOpen] = useState(false);
@@ -23,21 +22,6 @@ function Navbar() {
    const closeDropdown = () => {
       setIsOpen(false);
    };
-
-   // useEffect(() => {
-   //    const getBattle = async () => {
-   //       try {
-   //          const response = await fetchClanBattle();
-   //          if (response.data) {
-   //             setBattle(response.data); // Assuming response.data contains battle data
-   //          }
-   //       } catch (error) {
-   //          console.error('Error fetching battle data:', error);
-   //       }
-   //    };
-
-   //    getBattle();
-   // }, []);
 
    return (
       <nav className="bg-gray-800 p-4 rounded-md">
