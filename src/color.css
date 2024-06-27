@@ -38,12 +38,18 @@ body {
    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar {
-   background-color: var(--color-bg-dark);
-   color: var(--color-text-dark);
+.h-112 {
+   height: 36rem;
 }
 
-.h-112 {
-   height: 36rem
-   ;
+/* .sidebar {
+   --tw-translate-x: -120%;
+   transform: var(--tw-transform);
+   transition-property: transform;
+   transition-duration: 0.3s;
 }
+
+.sidebar.open {
+   transform: translateX(0);
+   --tw-translate-x: 0;
+} */

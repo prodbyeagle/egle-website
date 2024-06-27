@@ -80,7 +80,7 @@ function Sidebar({ battle, onClose, sidebarOpen }) {
 
    return (
       <aside
-         className={`bg-gray-800 text-center text-gray-200 p-5 w-64 rounded-md z-40 fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+         className={`bg-gray-800 text-center text-gray-200 p-5 w-64 rounded-md h-fit z-40 fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
             } md:relative md:translate-x-0 md:transform-none`}
       >
          <div className="flex justify-between items-center mb-4">
@@ -107,6 +107,8 @@ function Sidebar({ battle, onClose, sidebarOpen }) {
                      ))}
                   </ul>
                </div>
+               <p className="italic mt-16 shine-text">Leaderboard Soon for Phone!</p>
+               <p className="italic eagle-text">by @prodbyeagle</p>
             </div>
          )}
       </aside>
@@ -116,6 +118,36 @@ function Sidebar({ battle, onClose, sidebarOpen }) {
 export function BattleSidebarContent({ battle, onClose, sidebarOpen }) {
    return (
       <Sidebar battle={battle} onClose={onClose} sidebarOpen={sidebarOpen} />
+   );
+}
+
+export function LeaderboardSidebarContent({ leaderboardData, onClose, isMobile }) {
+   return (
+      <aside className={`bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 ${isMobile ? 'fixed inset-0' : 'static md:static md:transform-none transition-transform transform md:translate-x-0 hidden md:block'}`}>
+         <div className="inset-0 z-40 flex justify-between items-center mb-4">
+            {isMobile && (
+               <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
+                  <RoundedXIcon />
+               </button>
+            )}
+         </div>
+         <div className="text-center">
+            <h4 className="text-xl font-bold mb-2">Top #10 Chatters</h4>
+            {leaderboardData && leaderboardData.length > 0 ? (
+               <ul>
+                  {leaderboardData.slice(0, 10).map((player, index) => (
+                     <li key={index} className={`mb-2 text-sm ${index === 0 ? 'gold-text' : index === 1 ? 'silver-text' : index === 2 ? 'bronze-text' : ''}`}>
+                        <span>
+                           {player.username}
+                        </span>: {player.level} Level & {player.xp} XP
+                     </li>
+                  ))}
+               </ul>
+            ) : (
+               <p className="text-gray-400 italic">No Users Found!</p>
+            )}
+         </div>
+      </aside>
    );
 }
 

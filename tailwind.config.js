@@ -10,6 +10,9 @@ module.exports = {
       borderRadius: {
         '0.5': '0.5rem',
       },
+      translate: {
+        'full': '100%',
+      },
     },
   },
   variants: {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import { BattleSidebarContent } from './Sidebar';
-import LeaderboardSidebarContent from './LeaderboardSidebarContent';
+import { BattleSidebarContent, LeaderboardSidebarContent } from './Sidebar';
 import Modal from './Modal';
 import { fetchClanBattle } from '../api/fetchClanBattle';
 import { fetchLeaderboard } from '../api/fetchLeaderboard';
@@ -34,8 +33,6 @@ const Layout = ({ children }) => {
             console.error('Error fetching leaderboard:', error);
          }
       };
-
-      // const interval = setInterval(getLeaderboard, 5000);
 
       const getBattle = async () => {
          try {
@@ -72,7 +69,6 @@ const Layout = ({ children }) => {
       getLeaderboard();
 
       return () => {
-         // clearInterval(interval);
          window.removeEventListener('resize', handleResize);
       };
    }, []);
@@ -104,15 +100,19 @@ const Layout = ({ children }) => {
    };
 
    const handleTouchEnd = () => {
-      if (isMobile && touchStartX && touchEndX) {
-         if (touchStartX - touchEndX > 50) {
-            // Swipe left, close sidebar
+      if (isMobile && touchStartX !== null && touchEndX !== null) {
+         const deltaX = touchStartX - touchEndX;
+         const threshold = 100;
+
+         if (deltaX > threshold) {
+            // Wisch nach links: Sidebar schließen
             setSidebarOpen(false);
-         } else if (touchEndX - touchStartX > 50) {
-            // Swipe right, open sidebar
+         } else if (deltaX < -threshold) {
+            // Wisch nach rechts: Sidebar öffnen
             setSidebarOpen(true);
          }
-         // Reset touch positions
+
+         // Zurücksetzen der Touch-Werte
          setTouchStartX(null);
          setTouchEndX(null);
       }
@@ -126,19 +126,18 @@ const Layout = ({ children }) => {
       >
          <Navbar toggleSidebar={toggleSidebar} />
          <div className="relative flex">
-            <div className={`fixed inset-0 z-40 md:static md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:w-64`}>
+            <div className={`inset-0 z-40 md:relative md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-64' : '-translate-x-20'}`}>
                <div className="h-full flex flex-col mt-4">
                   <div>
                      <BattleSidebarContent battle={battle} onClose={toggleSidebar} />
-                  </div>
-                  <div>
                      <LeaderboardSidebarContent leaderboardData={leaderboard} onClose={toggleSidebar} />
                   </div>
                </div>
             </div>
-            {sidebarOpen && (
+
+            {sidebarOpen && isMobile && (
                <div
-                  className="fixed inset-0 bg-black opacity-50 z-30 cursor-pointer md:hidden"
+                  className="fixed inset-0 bg-black opacity-50 z-30 cursor-pointer"
                   onClick={toggleSidebar}
                />
             )}
