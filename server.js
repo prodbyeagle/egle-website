@@ -23,9 +23,8 @@ async function startServer() {
       await client.connect();
       console.log('Connected to MongoDB');
 
-      const db = client.db();
+      const db = client.db('EGLEDB');
       const usersCollection = db.collection('users');
-      console.log('Collection selected:', usersCollection.collectionName);
 
       await client.db().command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -33,7 +32,6 @@ async function startServer() {
       app.get('/api/leaderboard', async (req, res) => {
          try {
             const leaderboard = await usersCollection.find({ banned: false }).toArray();
-            console.log('Leaderboard data retrieved:', leaderboard);
             res.json(leaderboard);
          } catch (error) {
             console.error('Failed to fetch leaderboard:', error);
