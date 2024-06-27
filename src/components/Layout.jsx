@@ -1,45 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import { BattleSidebarContent, LeaderboardSidebarContent } from './Sidebar';
+import { BattleSidebarContent } from './Sidebar';
+import LeaderboardSidebarContent from './LeaderboardSidebarContent';
 import Modal from './Modal';
 import { fetchClanBattle } from '../api/fetchClanBattle';
-// import { fetchLeaderboard } from '../api/fetchLeaderboard';
+import { fetchLeaderboard } from '../api/fetchLeaderboard';
+import { updates } from '../updates';
 import '../color.css';
+import '../css/raritys.css';
 
 const Layout = ({ children }) => {
-   const [darkMode, setDarkMode] = useState(false);
    const [battle, setBattle] = useState(null);
-   // const [leaderboardData, setLeaderboardData] = useState([]);
    const [sidebarOpen, setSidebarOpen] = useState(false);
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [modalContent, setModalContent] = useState(null);
+   const [leaderboard, setLeaderboard] = useState(null);
 
    useEffect(() => {
-      const getBattle = async () => {
-         const data = await fetchClanBattle();
-         setBattle(data.data);
+      const getLeaderboard = async () => {
+         try {
+            const leader = await fetchLeaderboard();
+            setLeaderboard(leader);
+         } catch (error) {
+            console.error('Error fetching leaderboard:', error);
+         }
       };
 
-      // const getLeaderboard = async () => {
-      //    try {
-      //       const data = await fetchLeaderboard();
-      //       console.log('Leaderboard data received in frontend:', data);
-      //       setLeaderboardData(data);
-      //    } catch (error) {
-      //       console.error('Error fetching leaderboard data:', error);
-      //    }
-      // };
+      const getBattle = async () => {
+         try {
+            const data = await fetchClanBattle();
+            setBattle(data.data);
+         } catch (error) {
+            console.error('Error fetching clan battle:', error);
+         }
+
+         const latestUpdate = updates[0];
+         const storedVersion = localStorage.getItem('latestUpdateVersion');
+
+         if (storedVersion !== latestUpdate.version) {
+            openModal(
+               <div>
+                  {updates.map((update, index) => (
+                     <div key={index} className="mb-4">
+                        <h4 className="text-xl font-bold">{update.version} - {update.date}</h4>
+                        <ul className="list-disc list-inside">
+                           {update.changes.map((change, idx) => (
+                              <li key={idx}>{change}</li>
+                           ))}
+                        </ul>
+                        <h4 className={`text-sm italic ${update.from === "prodbyeagle" ? "eagle-text" : update.from === "dwhincandi" ? "andi-text" : ""}`}>From: {update.from}</h4>
+                     </div>
+                  ))}
+               </div>
+            );
+            localStorage.setItem('latestUpdateVersion', latestUpdate.version);
+         }
+      };
 
       getBattle();
-      // getLeaderboard();
-   }, []);
-
-   useEffect(() => {
-      const storedDarkMode = JSON.parse(localStorage.getItem('darkMode'));
-      if (storedDarkMode !== null) {
-         setDarkMode(storedDarkMode);
-         document.body.classList.toggle('dark', storedDarkMode);
-      }
+      getLeaderboard();
    }, []);
 
    const toggleSidebar = () => {
@@ -57,7 +76,7 @@ const Layout = ({ children }) => {
    };
 
    return (
-      <div className={`${darkMode ? 'dark' : ''} p-4 min-h-screen transition-colors duration-500 ease-in-out bg-gray-900 text-gray-100`}>
+      <div className={`p-4 min-h-screen transition-colors duration-500 ease-in-out bg-gray-900 text-gray-100`}>
          <Navbar toggleSidebar={toggleSidebar} />
          <div className="relative flex">
             <div className={`inset-0 z-40 md:static md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:w-64`}>
@@ -66,8 +85,7 @@ const Layout = ({ children }) => {
                      <BattleSidebarContent battle={battle} onClose={toggleSidebar} />
                   </div>
                   <div>
-                     <LeaderboardSidebarContent onClose={toggleSidebar} />
-                     {/* leaderboardData={leaderboardData} */}
+                     <LeaderboardSidebarContent leaderboardData={leaderboard} onClose={toggleSidebar} />
                   </div>
                </div>
             </div>
@@ -83,7 +101,7 @@ const Layout = ({ children }) => {
                )}
             </main>
          </div>
-         <Modal isOpen={isModalOpen} onClose={closeModal} title="Modal Title">
+         <Modal isOpen={isModalOpen} onClose={closeModal} title="What's New!">
             {modalContent}
          </Modal>
       </div>

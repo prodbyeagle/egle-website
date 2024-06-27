@@ -4,9 +4,11 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Application from './pages/Application';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 import './color.css';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import Lenis from 'lenis';
 
 const App = () => {
   return (
@@ -18,10 +20,20 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/application" element={<Application />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>
   );
 };
+
+const lenis = new Lenis();
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
 
 export default App;

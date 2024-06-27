@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -9,21 +9,29 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.S_PORT || 5000;
-const URI = process.env.MONGODB_URI;
+const URI = process.env.URI;
 
 async function startServer() {
    try {
-      const client = new MongoClient(URI);
+      const client = new MongoClient(URI, {
+         serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+         }
+      });
       await client.connect();
       console.log('Connected to MongoDB');
 
-      const db = client.db();
+      const db = client.db('EGLEDB');
       const usersCollection = db.collection('users');
+
+      await client.db().command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
       app.get('/api/leaderboard', async (req, res) => {
          try {
-            const leaderboard = await usersCollection.find().toArray();
-            console.log('Leaderboard data retrieved:', leaderboard);
+            const leaderboard = await usersCollection.find({ banned: false }).toArray();
             res.json(leaderboard);
          } catch (error) {
             console.error('Failed to fetch leaderboard:', error);

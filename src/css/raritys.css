@@ -35,3 +35,40 @@
    -webkit-background-clip: text;
    background-clip: text;
 }
+
+@keyframes eagle {
+   0% {
+      background-image: linear-gradient(to right, #d683ff, #e5b1ff, #ae4ae0);
+      background-size: 200% auto;
+      color: #d683ff;
+      background-position: 100% 0;
+   }
+
+   100% {
+      background-position: -100% 0;
+   }
+}
+
+.eagle-text {
+   background-clip: text;
+   -webkit-background-clip: text;
+   animation: eagle 5s infinite linear alternate;
+}
+
+@keyframes andi {
+   0% {
+      color: #ff2121;
+   }
+
+   50% {
+      color: #b40000;
+   }
+
+   100% {
+      color: #e04a4a;
+   }
+}
+
+.andi-text {
+   animation: andi 5s infinite alternate;
+}

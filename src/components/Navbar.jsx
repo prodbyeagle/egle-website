@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import eagleLogoPNG from '../assets/eagle.png';
 import eagleLogoGIF from '../assets/eagle.gif';
-// import { fetchClanBattle } from '../api/fetchClanBattle';
 
 function Navbar() {
    const [isOpen, setIsOpen] = useState(false);
@@ -23,21 +22,6 @@ function Navbar() {
    const closeDropdown = () => {
       setIsOpen(false);
    };
-
-   // useEffect(() => {
-   //    const getBattle = async () => {
-   //       try {
-   //          const response = await fetchClanBattle();
-   //          if (response.data) {
-   //             setBattle(response.data); // Assuming response.data contains battle data
-   //          }
-   //       } catch (error) {
-   //          console.error('Error fetching battle data:', error);
-   //       }
-   //    };
-
-   //    getBattle();
-   // }, []);
 
    return (
       <nav className="bg-gray-800 p-4 rounded-md">
@@ -66,24 +50,24 @@ function Navbar() {
                   ☰
                </button>
                {isOpen && (
-                  <div className="absolute right-0 z-50 mt-2 bg-gray-900 border-2 border-gray-700 rounded-md shadow-lg py-2 px-4 w-48">
+                  <div className="absolute right-0 text-center z-50 mt-2 bg-gray-900 border-2 border-gray-700 rounded-md shadow-lg py-2 px-4 w-48">
                      <Link
                         to="/"
-                        className="block mb-1 text-white py-1 border-2 border-gray-900 hover:border-gray-700 rounded-md"
+                        className="block mb-1 text-white py-1 border-2 border-gray-900 hover:border-gray-700 rounded-md transition-all duration-100"
                         onClick={closeDropdown}
                      >
                         Home
                      </Link>
                      <Link
                         to="/application"
-                        className="block mb-1 text-white py-1 border-2 border-gray-900 hover:border-gray-700 rounded-md"
+                        className="block mb-1 text-white py-1 border-2 border-gray-900 hover:border-gray-700 rounded-md transition-all duration-100"
                         onClick={closeDropdown}
                      >
                         Application
                      </Link>
                      <Link
                         to="/contact"
-                        className="block  text-white py-1 border-2 border-gray-900 hover:border-gray-700 rounded-md"
+                        className="block text-white py-1 border-2 border-gray-900 hover:border-gray-700 rounded-md transition-all duration-100"
                         onClick={closeDropdown}
                      >
                         Contact
