@@ -107,8 +107,8 @@ function Sidebar({ battle, onClose, sidebarOpen }) {
                      ))}
                   </ul>
                </div>
-               <p className="italic mt-16 shine-text">Leaderboard Soon for Phone!</p>
-               <p className="italic eagle-text">by @prodbyeagle</p>
+               <p className="italic mt-16 shine-text md:hidden">Leaderboard Soon for Phone!</p>
+               <p className="italic eagle-text md:hidden">by @prodbyeagle</p>
             </div>
          )}
       </aside>

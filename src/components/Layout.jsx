@@ -102,7 +102,7 @@ const Layout = ({ children }) => {
    const handleTouchEnd = () => {
       if (isMobile && touchStartX !== null && touchEndX !== null) {
          const deltaX = touchStartX - touchEndX;
-         const threshold = 100;
+         const threshold = 50;
 
          if (deltaX > threshold) {
             // Wisch nach links: Sidebar schließen

@@ -19,7 +19,7 @@ body {
    background-color: var(--color-bg-light);
    color: var(--color-text-light);
    transition: background-color 0.3s, color 0.3s;
-   font-family: 'Poppins', sans-serif;
+   font-family: 'DM Sans', sans-serif;
 }
 
 .p-4 {
