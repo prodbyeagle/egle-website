@@ -19,14 +19,14 @@ const RoundedXIcon = () => (
    </svg>
 );
 
-function Sidebar({ battle, onClose }) {
+function Sidebar({ battle, onClose, sidebarOpen }) {
    const [showDetailedTime, setShowDetailedTime] = useState(true);
    const [currentTime, setCurrentTime] = useState(new Date());
 
    useEffect(() => {
       const interval = setInterval(() => {
          setCurrentTime(new Date());
-      }, 1);
+      }, 1000);
 
       return () => clearInterval(interval);
    }, []);
@@ -79,7 +79,10 @@ function Sidebar({ battle, onClose }) {
    };
 
    return (
-      <aside className="bg-gray-800 text-center text-gray-200 mt-4 p-5 w-64 rounded-md z-40 fixed md:static md:transform-none transition-transform transform md:translate-x-0 hidden md:block">
+      <aside
+         className={`bg-gray-800 text-center text-gray-200 p-5 w-64 rounded-md z-40 fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+            } md:relative md:translate-x-0 md:transform-none`}
+      >
          <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold">{battle && battle.configData?.Title}</h3>
             <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
@@ -110,9 +113,9 @@ function Sidebar({ battle, onClose }) {
    );
 }
 
-export function BattleSidebarContent({ battle, onClose }) {
+export function BattleSidebarContent({ battle, onClose, sidebarOpen }) {
    return (
-      <Sidebar battle={battle} onClose={onClose} />
+      <Sidebar battle={battle} onClose={onClose} sidebarOpen={sidebarOpen} />
    );
 }
 
