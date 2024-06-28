@@ -19,7 +19,7 @@ const RoundedXIcon = () => (
    </svg>
 );
 
-function Sidebar({ battle, onClose, sidebarOpen }) {
+function Sidebar({ battle, leaderboardData, onClose, sidebarOpen, isMobile }) {
    const [showDetailedTime, setShowDetailedTime] = useState(true);
    const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -107,31 +107,10 @@ function Sidebar({ battle, onClose, sidebarOpen }) {
                      ))}
                   </ul>
                </div>
-               <p className="italic mt-16 shine-text md:hidden">Leaderboard Soon for Phone!</p>
-               <p className="italic eagle-text md:hidden">by @prodbyeagle</p>
             </div>
          )}
-      </aside>
-   );
-}
-
-export function BattleSidebarContent({ battle, onClose, sidebarOpen }) {
-   return (
-      <Sidebar battle={battle} onClose={onClose} sidebarOpen={sidebarOpen} />
-   );
-}
-
-export function LeaderboardSidebarContent({ leaderboardData, onClose, isMobile }) {
-   return (
-      <aside className={`bg-gray-800 text-gray-200 mt-4 p-5 w-64 rounded-md z-40 ${isMobile ? 'fixed inset-0' : 'static md:static md:transform-none transition-transform transform md:translate-x-0 hidden md:block'}`}>
-         <div className="inset-0 z-40 flex justify-between items-center mb-4">
-            {isMobile && (
-               <button className="text-gray-300 hover:text-white focus:outline-none md:hidden" onClick={onClose}>
-                  <RoundedXIcon />
-               </button>
-            )}
-         </div>
-         <div className="text-center">
+         <hr className="my-4 border border-gray-600" />
+         <div className="mb-4">
             <h4 className="text-xl font-bold mb-2">Top #10 Chatters</h4>
             {leaderboardData && leaderboardData.length > 0 ? (
                <ul>
@@ -147,6 +126,7 @@ export function LeaderboardSidebarContent({ leaderboardData, onClose, isMobile }
                <p className="text-gray-400 italic">No Users Found!</p>
             )}
          </div>
+         <p className="italic eagle-text md:hidden">by @prodbyeagle</p>
       </aside>
    );
 }

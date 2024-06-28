@@ -42,6 +42,13 @@ body {
    height: 36rem;
 }
 
+@media (max-width: 767px) {
+   .sidebar-container {
+      display: flex;
+      flex-direction: column;
+   }
+}
+
 /* .sidebar {
    --tw-translate-x: -120%;
    transform: var(--tw-transform);

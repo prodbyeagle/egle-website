@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import { BattleSidebarContent, LeaderboardSidebarContent } from './Sidebar';
+import Sidebar from './Sidebar';
 import Modal from './Modal';
 import { fetchClanBattle } from '../api/fetchClanBattle';
 import { fetchLeaderboard } from '../api/fetchLeaderboard';
@@ -126,12 +126,15 @@ const Layout = ({ children }) => {
       >
          <Navbar toggleSidebar={toggleSidebar} />
          <div className="relative flex">
-            <div className={`inset-0 z-40 md:relative md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-64' : '-translate-x-20'}`}>
+            <div className={`sidebar-container inset-0 z-40 md:relative md:transform-none transition-transform transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-20'}`}>
                <div className="h-full flex flex-col mt-4">
-                  <div>
-                     <BattleSidebarContent battle={battle} onClose={toggleSidebar} />
-                     <LeaderboardSidebarContent leaderboardData={leaderboard} onClose={toggleSidebar} />
-                  </div>
+                  <Sidebar
+                     battle={battle}
+                     leaderboardData={leaderboard}
+                     onClose={toggleSidebar}
+                     sidebarOpen={sidebarOpen}
+                     isMobile={isMobile}
+                  />
                </div>
             </div>
 
