@@ -1,38 +1,50 @@
 @keyframes rainbow {
    0% {
-         color: #ff5151;
+      color: #ff5151;
          -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
          -webkit-mask-size: 200%;
+         mask-size: 200%;
       }
    
       20% {
          color: #ffc043;
          -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
          -webkit-mask-size: 200%;
+         mask-size: 200%;
       }
    
       40% {
          color: #ffff40;
          -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
          -webkit-mask-size: 200%;
+         mask-size: 200%;
       }
    
       60% {
          color: #44ff44;
          -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
          -webkit-mask-size: 200%;
+         mask-size: 200%;
       }
    
       80% {
          color: #3d3dff;
          -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
          -webkit-mask-size: 200%;
+         mask-size: 200%;
       }
    
       100% {
          color: #c041ff;
          -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
          -webkit-mask-size: 200%;
+         mask-size: 200%;
       }
    }
 
@@ -46,7 +58,9 @@
    animation: shine 2s linear infinite;
    color: #d683ff;
    -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
-   -webkit-mask-size: 200%;
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+         mask-size: 200%;
 }
 
 .bronze-text {
@@ -55,7 +69,9 @@
    animation: shine 2s linear infinite;
    color: rgb(184, 117, 31);
    -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
-   -webkit-mask-size: 200%;
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+         mask-size: 200%;
 }
 
 .silver-text {
@@ -64,7 +80,9 @@
    animation: shine 2s linear infinite;
    color: silver;
    -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
-   -webkit-mask-size: 200%;
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+         mask-size: 200%;
 }
 
 .gold-text {
@@ -73,7 +91,9 @@
    animation: shine 2s linear infinite;
    color: gold;
    -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
-   -webkit-mask-size: 200%;
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+         mask-size: 200%;
 }
 
 .shine-text {
@@ -82,7 +102,9 @@
    animation: shine 2s linear infinite;
    color: #7c7c7c;
    -webkit-mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
-   -webkit-mask-size: 200%;
+      mask-image: linear-gradient(-75deg, rgba(255, 255, 255, 0.6) 30%, #fff 50%, rgba(255, 255, 255, 0.6) 70%);
+         -webkit-mask-size: 200%;
+         mask-size: 200%;
 }
 
 @keyframes shine {
