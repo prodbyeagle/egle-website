@@ -16,6 +16,7 @@ const Layout = ({ children }) => {
    const [modalContent, setModalContent] = useState(null);
    const [top5Clans, settop5Clans] = useState([]);
    const [leaderboard, setLeaderboard] = useState(null);
+   const [modalTitle, setModalTitle] = useState('');
    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
    const [touchStartX, setTouchStartX] = useState(null);
    const [touchEndX, setTouchEndX] = useState(null);
@@ -63,16 +64,19 @@ const Layout = ({ children }) => {
                <div>
                   {updates.map((update, index) => (
                      <div key={index}>
-                        <h4 className="text-xl font-bold">{update.version} - {update.date}</h4>
+                        <h4 className="text-lg font-bold">{update.version} - {update.date}</h4>
                         <ul className="list-disc list-inside">
                            {update.changes.map((change, idx) => (
                               <li key={idx}>{change}</li>
                            ))}
                         </ul>
-                        <h4 className={`mt-4 text-sm italic ${update.from === "prodbyeagle" ? "eagle-text" : ""}`}>From: {update.from}</h4>
+                        <h4 className="mt-4 text-sm italic">
+                           From: <span className={update.from === "prodbyeagle" ? "eagle-text" : ""}>{update.from}</span>
+                        </h4>
                      </div>
                   ))}
-               </div>
+               </div>,
+               `What's New! - ${latestUpdate.title}`
             );
             localStorage.setItem('latestUpdateVersion', latestUpdate.version);
          }
@@ -94,8 +98,9 @@ const Layout = ({ children }) => {
       setSidebarOpen(!sidebarOpen);
    };
 
-   const openModal = (content) => {
+   const openModal = (content, title) => {
       setModalContent(content);
+      setModalTitle(title);
       setIsModalOpen(true);
    };
 
@@ -202,7 +207,7 @@ const Layout = ({ children }) => {
                )}
             </main>
          </div>
-         <Modal isOpen={isModalOpen} onClose={closeModal} title="What's New!">
+         <Modal isOpen={isModalOpen} onClose={closeModal} title={modalTitle}>
             {modalContent}
          </Modal>
       </div>
