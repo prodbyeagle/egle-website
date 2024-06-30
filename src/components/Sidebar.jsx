@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import '../css/raritys.css';
+import { extractImageId, buildImageUrl } from '../api/fetchImage';
+import { formatNumberWithUnits, timeSince } from '../utils';
 
 const RoundedXIcon = () => (
    <svg
@@ -19,7 +21,7 @@ const RoundedXIcon = () => (
    </svg>
 );
 
-function Sidebar({ battle, leaderboardData, onClose, sidebarOpen, isMobile }) {
+function Sidebar({ battle, leaderboardData, top5Clans, onClose, sidebarOpen, isMobile }) {
    const [showDetailedTime, setShowDetailedTime] = useState(true);
    const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -44,6 +46,16 @@ function Sidebar({ battle, leaderboardData, onClose, sidebarOpen, isMobile }) {
          }
       }
       return '';
+   };
+
+   const gettop5RarityClassName = (index) => {
+      if (index === 0) {
+         return 'rainbow-text'; // #1 Clan bekommt rainbow-text Klasse
+      } else if (index === 1 || index === 2) {
+         return 'gold-text'; // #2 und #3 Clans bekommen gold-text Klasse
+      } else {
+         return ''; // Alle anderen Clans bekommen keine spezielle Klasse
+      }
    };
 
    const formatTime = (timestamp) => {
@@ -80,7 +92,7 @@ function Sidebar({ battle, leaderboardData, onClose, sidebarOpen, isMobile }) {
 
    return (
       <aside
-         className={`bg-gray-800 text-center text-gray-200 p-5 w-64 rounded-md h-fit z-40 fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+         className={`bg-gray-800 text-center text-gray-200 p-5 w-60 rounded-md h-fit z-40 fixed inset-y-0 left-0 transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
             } md:relative md:translate-x-0 md:transform-none`}
       >
          <div className="flex justify-between items-center mb-4">
@@ -102,7 +114,7 @@ function Sidebar({ battle, leaderboardData, onClose, sidebarOpen, isMobile }) {
                   <ul>
                      {battle.configData.PlacementRewards.map((reward, index) => (
                         <li key={index} className="mb-2 font-medium">
-                           <span className={getRarityClassName(reward)}>{reward.Item._data.id}:</span> #{reward.Best} - #{reward.Worst}
+                           <span title={reward.Item._data.id} className={getRarityClassName(reward)}>{reward.Item._data.id}:</span> #{reward.Best} - #{reward.Worst}
                         </li>
                      ))}
                   </ul>
@@ -124,6 +136,26 @@ function Sidebar({ battle, leaderboardData, onClose, sidebarOpen, isMobile }) {
                </ul>
             ) : (
                <p className="text-gray-400 italic">No Users Found!</p>
+            )}
+         </div>
+         <hr className="my-4 border border-gray-600" />
+         <div className="mb-4">
+            <h4 className="text-xl font-bold mb-2">Top #5 Clans</h4>
+            {top5Clans.length > 0 ? (
+               <ul>
+                  {top5Clans.map((clan, index) => (
+                     <li
+                        title={`${formatNumberWithUnits(clan.DepositedDiamonds)} Diamonds, ${clan.CountryCode}, Created ${timeSince(clan.Created)}`}
+                        key={index}
+                        className="mb-2 flex text-center transform transition-all rounded-md border-2 border-gray-800 duration-100 items-center hover:border-gray-500 p-1"
+                     >
+                        <img src={buildImageUrl(extractImageId(clan.Icon))} alt={`${clan.Name} icon`} className="w-8 h-8 mx-2" />
+                        <span className={gettop5RarityClassName(index)}>{clan.Name}</span>: {clan.Points} Points
+                     </li>
+                  ))}
+               </ul>
+            ) : (
+               <p className="text-gray-400 italic">No Clans Found!</p>
             )}
          </div>
          <p className="italic eagle-text md:hidden">by @prodbyeagle</p>

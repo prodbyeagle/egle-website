@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import Modal from './Modal';
 import { fetchClanBattle } from '../api/fetchClanBattle';
 import { fetchLeaderboard } from '../api/fetchLeaderboard';
+import fetchtop5 from '../api/fetchtop5';
 import { updates } from '../updates';
 import '../color.css';
 import '../css/raritys.css';
@@ -13,6 +14,7 @@ const Layout = ({ children }) => {
    const [sidebarOpen, setSidebarOpen] = useState(false);
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [modalContent, setModalContent] = useState(null);
+   const [top5Clans, settop5Clans] = useState([]);
    const [leaderboard, setLeaderboard] = useState(null);
    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
    const [touchStartX, setTouchStartX] = useState(null);
@@ -33,6 +35,17 @@ const Layout = ({ children }) => {
             console.error('Error fetching leaderboard:', error);
          }
       };
+
+      const gettop5Clans = async () => {
+         try {
+            const top5 = await fetchtop5();
+            settop5Clans(top5);
+         } catch (error) {
+            console.error('Error fetching top 10 clans:', error);
+         }
+      };
+
+      gettop5Clans();
 
       const getBattle = async () => {
          try {
@@ -68,6 +81,10 @@ const Layout = ({ children }) => {
       getBattle();
       getLeaderboard();
 
+      setInterval(() => {
+         gettop5Clans();
+      }, 1800000);
+
       return () => {
          window.removeEventListener('resize', handleResize);
       };
@@ -99,6 +116,37 @@ const Layout = ({ children }) => {
       }
    };
 
+   const handleMouseDown = (e) => {
+      if (!isMobile) {
+         setTouchStartX(e.clientX);
+      }
+   };
+
+   const handleMouseMove = (e) => {
+      if (!isMobile && touchStartX !== null) {
+         setTouchEndX(e.clientX);
+      }
+   };
+
+   const handleMouseUp = () => {
+      if (!isMobile && touchStartX !== null && touchEndX !== null) {
+         const deltaX = touchStartX - touchEndX;
+         const threshold = 50;
+
+         if (deltaX > threshold) {
+            // Wisch nach links: Sidebar schließen
+            setSidebarOpen(false);
+         } else if (deltaX < -threshold) {
+            // Wisch nach rechts: Sidebar öffnen
+            setSidebarOpen(true);
+         }
+
+         // Zurücksetzen der Touch-Werte
+         setTouchStartX(null);
+         setTouchEndX(null);
+      }
+   };
+
    const handleTouchEnd = () => {
       if (isMobile && touchStartX !== null && touchEndX !== null) {
          const deltaX = touchStartX - touchEndX;
@@ -123,6 +171,9 @@ const Layout = ({ children }) => {
          onTouchStart={handleTouchStart}
          onTouchMove={handleTouchMove}
          onTouchEnd={handleTouchEnd}
+         onMouseDown={handleMouseDown}
+         onMouseMove={handleMouseMove}
+         onMouseUp={handleMouseUp}
       >
          <Navbar toggleSidebar={toggleSidebar} />
          <div className="relative flex">
@@ -131,6 +182,7 @@ const Layout = ({ children }) => {
                   <Sidebar
                      battle={battle}
                      leaderboardData={leaderboard}
+                     top5Clans={top5Clans} // Übergib die Top 10 Clans an die Sidebar
                      onClose={toggleSidebar}
                      sidebarOpen={sidebarOpen}
                      isMobile={isMobile}
