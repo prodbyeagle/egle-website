@@ -1,10 +1,14 @@
 // updates.js
 export const updates = [
    {
-      version: "0.8",
-      date: "27.06.2024",
+      version: "v1.0",
+      title: "Wohoo! First Major Version!",
+      date: "30.06.2024",
       changes: [
-         "Fixed Sidebar for Phone",
+         "Added Top #5 Clan Battle!",
+         "Fixed Bugs",
+         "Changed Font",
+         "Made the Rainbow Effect 5sec instead of 20sec",
       ],
       from: "prodbyeagle"
    }
